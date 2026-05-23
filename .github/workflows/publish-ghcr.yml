@@ -3,9 +3,9 @@ name: Publish Container Image
 on:
   push:
     branches:
-      - master
+      - '**'
     tags:
-      - 'v*'
+      - '*'
   workflow_dispatch:
 
 jobs:
@@ -34,10 +34,9 @@ jobs:
         with:
           images: ghcr.io/parchlinux/cheat.sh
           tags: |
-            type=ref,event=branch
             type=ref,event=tag
             type=sha
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=latest
 
       - name: Build and push
         uses: docker/build-push-action@v6
